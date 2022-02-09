@@ -13,30 +13,46 @@ import org.springframework.web.bind.annotation.*;
 public class DatabaseApplication {
 
 	@Autowired
-	//private LanguageRepository languageRepository;
 	private ActorRepository actorRepository;
 
-//	public DatabaseApplication(LanguageRepository languageRepository){
-//		this.languageRepository = languageRepository;
-//	}
+	@Autowired
+	private LanguageRepository languageRepository;
 
-	public DatabaseApplication(ActorRepository actorRepository){
+	@Autowired
+	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private FilmRepository filmRepository;
+
+	public DatabaseApplication(ActorRepository actorRepository, LanguageRepository languageRepository, CategoryRepository categoryRepository, FilmRepository filmRepository ){
 		this.actorRepository = actorRepository;
+		this.languageRepository = languageRepository;
+		this.categoryRepository = categoryRepository;
+		this.filmRepository = filmRepository;
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DatabaseApplication.class, args);
 	}
 
-	@GetMapping("/AllActor")
+	@GetMapping("/AllActors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors(){return actorRepository.findAll();
 	}
 
-//	@GetMapping("/AllLanguages")
-//	public @ResponseBody
-//	Iterable<Language> getAllLanguages(){return languageRepository.findAll();
-//	}
+	@GetMapping("/AllLanguages")
+	public @ResponseBody
+	Iterable<Language> getAllLanguages(){return languageRepository.findAll();
+	}
 
+	@GetMapping("/AllCategories")
+	public @ResponseBody
+	Iterable<Category> getAllCategories(){return categoryRepository.findAll();
+	}
+
+	@GetMapping("/AllFilms")
+	public @ResponseBody
+	Iterable<Film> getAllFilms(){return filmRepository.findAll();
+	}
 
 }
