@@ -24,6 +24,7 @@ public class DatabaseApplication {
 	@Autowired
 	private FilmRepository filmRepository;
 
+	private String save = "save";
 	public DatabaseApplication(ActorRepository actorRepository, LanguageRepository languageRepository, CategoryRepository categoryRepository, FilmRepository filmRepository ){
 		this.actorRepository = actorRepository;
 		this.languageRepository = languageRepository;
@@ -43,6 +44,13 @@ public class DatabaseApplication {
 	@GetMapping("/AllLanguages")
 	public @ResponseBody
 	Iterable<Language> getAllLanguages(){return languageRepository.findAll();
+	}
+
+	@PostMapping("/AddLanguage")
+	public @ResponseBody String addLanguage(@RequestParam String name){
+		Language addLanguage = new Language(name);
+		languageRepository.save(addLanguage);
+		return save;
 	}
 
 	@GetMapping("/AllCategories")

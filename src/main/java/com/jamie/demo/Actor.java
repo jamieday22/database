@@ -1,5 +1,7 @@
 package com.jamie.demo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,6 +21,7 @@ public class Actor implements Serializable
 
 
     @ManyToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Film> films = new HashSet<>();
 
     public Actor(String first_name, String last_name) {
