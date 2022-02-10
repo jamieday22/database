@@ -25,7 +25,10 @@ public class DatabaseApplication {
 	private FilmRepository filmRepository;
 
 	private String save = "save";
-	public DatabaseApplication(ActorRepository actorRepository, LanguageRepository languageRepository, CategoryRepository categoryRepository, FilmRepository filmRepository ){
+	public DatabaseApplication(ActorRepository actorRepository,
+							   LanguageRepository languageRepository,
+							   CategoryRepository categoryRepository,
+							   FilmRepository filmRepository ){
 		this.actorRepository = actorRepository;
 		this.languageRepository = languageRepository;
 		this.categoryRepository = categoryRepository;
