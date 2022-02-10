@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @SpringBootApplication
 @RestController
@@ -49,12 +51,7 @@ public class DatabaseApplication {
 	Iterable<Language> getAllLanguages(){return languageRepository.findAll();
 	}
 
-	@PostMapping("/AddLanguage")
-	public @ResponseBody String addLanguage(@RequestParam String name){
-		Language addLanguage = new Language(name);
-		languageRepository.save(addLanguage);
-		return save;
-	}
+
 
 	@GetMapping("/AllCategories")
 	public @ResponseBody
@@ -64,6 +61,28 @@ public class DatabaseApplication {
 	@GetMapping("/AllFilms")
 	public @ResponseBody
 	Iterable<Film> getAllFilms(){return filmRepository.findAll();
+	}
+
+	@GetMapping("/FindFilms/{film_id}")
+	public @ResponseBody
+	Optional<Film> getFilmById(@PathVariable int film_id){
+		return filmRepository.findById(film_id);
+	}
+
+	@PostMapping("/AddLanguage")
+	public @ResponseBody String addLanguage(@RequestParam String name){
+		Language addLanguage = new Language(name);
+		languageRepository.save(addLanguage);
+		return save;
+	}
+
+	@PostMapping("/AddFilm")
+	public @ResponseBody String addFilm(@RequestParam String title,String description,int release_year,String rating, int language_id) {
+		Film addFilm = new Film(title, description, release_year, rating, language_id);
+		filmRepository.save(addFilm);
+		return save;
+
+
 	}
 
 }

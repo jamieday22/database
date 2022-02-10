@@ -11,9 +11,13 @@ import java.util.Set;
 public class Film implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int film_id;
     private int language_id;
+    private String title;
+    private String description;
+    private int release_year;
+    private String rating;
 
     @ManyToOne
     @JoinColumn(name = "language_id", insertable = false, updatable = false)
@@ -23,11 +27,6 @@ public class Film implements Serializable {
     @ManyToOne
     @JoinColumn(name = "original_language_id", insertable = false, updatable = false)
     private Language original_language;
-
-    private String title;
-    private String description;
-    private int release_year;
-    private String rating;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "film_actor",
@@ -41,12 +40,18 @@ public class Film implements Serializable {
 
 
 
-    public Film(String title, int release_year, String rating, String description) {
+    public Film(String title,String description, int release_year, String rating , int language_id ) {
         this.title = title;
         this.description = description;
         this.release_year = release_year;
         this.rating = rating;
+        this.language_id = language_id;
     }
+
+
+
+
+
 
     public Set<Actor> getActor()
     {
