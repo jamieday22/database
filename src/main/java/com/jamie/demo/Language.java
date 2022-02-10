@@ -1,12 +1,13 @@
 package com.jamie.demo;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "language")
 public class Language {
 
     @Id
@@ -14,6 +15,12 @@ public class Language {
     private int language_id;
 
     private String name;
+
+    @OneToMany
+    @JoinColumn(name = "language_id", insertable = false, updatable = false)
+    @JsonIgnore
+    private Set<Film> film;
+
 
     public Language(String name) {
         this.name = name;
@@ -35,5 +42,15 @@ public class Language {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Film> getFilm()
+    {
+        return film;
+    }
+
+    public void setFilm(Set<Film> film)
+    {
+        this.film = film;
     }
 }

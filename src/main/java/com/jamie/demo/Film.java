@@ -13,6 +13,16 @@ public class Film implements Serializable {
     @Id
     @GeneratedValue
     private int film_id;
+    private int language_id;
+
+    @ManyToOne
+    @JoinColumn(name = "language_id", insertable = false, updatable = false)
+    private Language language;
+
+    private Integer original_language_id;
+    @ManyToOne
+    @JoinColumn(name = "original_language_id", insertable = false, updatable = false)
+    private Language original_language;
 
     private String title;
     private String description;
@@ -95,6 +105,46 @@ public class Film implements Serializable {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public int getLanguage_id()
+    {
+        return language_id;
+    }
+
+    public void setLanguage_id(int language_id)
+    {
+        this.language_id = language_id;
+    }
+
+    public Integer getOriginal_language_id()
+    {
+        return original_language_id;
+    }
+
+    public void setOriginal_language_id(Integer original_language_id)
+    {
+        this.original_language_id = original_language_id;
+    }
+
+    public Language getOriginal_language()
+    {
+        return original_language;
+    }
+
+    public void setOriginal_language(Language original_language)
+    {
+        this.original_language = original_language;
+    }
+
+    public Language getLanguage()
+    {
+        return language;
+    }
+
+    public void setLanguage(Language language)
+    {
+        this.language = language;
     }
 }
 
